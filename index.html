@@ -215,17 +215,26 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
   #p2 > div{width:90vw!important;max-width:420px}
   .cline{font-size:10.5px!important}
 
-  /* Phase 3 – stack devices vertically */
-  #p3 > div:not(#liveBadge){flex-direction:column!important;align-items:center!important;gap:1.5rem!important}
-  #mbk > div:first-child{width:280px!important}
-  #mbk > div:first-child > div:last-child{height:155px!important}
-  #iph3 > div{width:110px!important}
-  #iph3 > div > div:nth-child(3){height:180px!important}
+  /* Phase 3 – transform scale both devices to fit phone screen */
+  #p3 > div:not(#liveBadge){
+    flex-direction:column!important;
+    align-items:center!important;
+    gap:0!important;
+    margin-top:-2rem!important;
+  }
+  /* JS handles transform with scale, just fix layout gap */
+  #p3 [style*="display:flex"][style*="align-items:flex-end"]{
+    gap:0!important;
+    margin-top:-3rem!important;
+    margin-bottom:-4rem!important;
+  }
 
-  /* Phase 4 – stack cards */
-  #p4 > div:first-child{grid-template-columns:1fr!important;max-width:280px!important;gap:.8rem!important}
-  #p4 > div:last-child{max-width:280px!important;padding:1rem!important}
-  .mcard{padding:1.1rem 1.2rem!important;border-radius:16px!important}
+  /* Phase 4 – stack cards 1 col, compact */
+  #p4{padding:0 1rem!important}
+  #p4 > div:first-child{grid-template-columns:1fr 1fr!important;max-width:88vw!important;gap:.6rem!important}
+  #p4 > div:last-child{max-width:88vw!important;padding:.9rem 1rem!important}
+  .mcard{padding:1rem!important;border-radius:14px!important}
+  #igN,#visN,.mcard [style*="font-size:2rem"]{font-size:1.4rem!important}
 }
 
 @media(max-width:480px){
@@ -877,10 +886,27 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justif
     const mbk=document.getElementById('mbk');
     const iph=document.getElementById('iph3');
     const badge=document.getElementById('liveBadge');
+    const mob=window.innerWidth<=768;
+    const ms=mob?0.44:1; // mobile scale multiplier
+
     const mv=mr(t,.05,.4,0,1);
-    if(mbk){ mbk.style.opacity=mv; mbk.style.transform=`translateY(${mr(t,.05,.4,20,0)}px) scale(${mr(t,.05,.4,.94,1)})`; mbk.style.transition='none'; }
+    if(mbk){
+      mbk.style.opacity=mv;
+      const sc=mr(t,.05,.4,.94,1)*ms;
+      const ty=mr(t,.05,.4,20,0);
+      mbk.style.transform=`translateY(${ty}px) scale(${sc})`;
+      mbk.style.transformOrigin='center top';
+      mbk.style.transition='none';
+    }
     const iv=mr(t,.2,.55,0,1);
-    if(iph){ iph.style.opacity=iv; iph.style.transform=`translateX(${mr(t,.2,.55,28,0)}px) scale(${mr(t,.2,.55,.92,1)})`; iph.style.transition='none'; }
+    if(iph){
+      iph.style.opacity=iv;
+      const sc2=mr(t,.2,.55,.92,1)*ms;
+      const tx=mob?0:mr(t,.2,.55,28,0);
+      iph.style.transform=`translateX(${tx}px) scale(${sc2})`;
+      iph.style.transformOrigin='center top';
+      iph.style.transition='none';
+    }
     const bv=mr(t,.65,.85,0,1);
     if(badge){ badge.style.opacity=bv; badge.style.transform=`translateY(${mr(t,.65,.85,8,0)}px)`; badge.style.transition='none'; }
   }
