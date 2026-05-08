@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digitale Exzellenz · Web · Design · Marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ac:#00E5FF;
+  --ac2:#0099BB;
+  --bg:#04060A;
+  --bg2:#080D14;
+  --bg3:#0D1420;
+  --text:#EEF2F7;
+  --muted:#9AAABB;
+  --border:rgba(0,229,255,0.12);
+  --border2:rgba(0,229,255,0.25);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cur{position:fixed;width:6px;height:6px;background:var(--ac);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .08s}
+.cur-ring{position:fixed;width:32px;height:32px;border:1px solid var(--ac);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .18s ease;opacity:.4}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.8rem 5vw;display:flex;justify-content:space-between;align-items:center;transition:all .4s}
+nav.s{background:rgba(4,6,10,.94);backdrop-filter:blur(24px);padding:1.1rem 5vw;border-bottom:1px solid var(--border)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.7rem;letter-spacing:.04em;color:var(--ac);text-decoration:none}
+.nav-links{display:flex;gap:2.8rem;list-style:none}
+.nav-links a{color:var(--muted);font-size:.78rem;text-decoration:none;letter-spacing:.14em;text-transform:uppercase;transition:color .25s}
+.nav-links a:hover{color:var(--ac)}
+.nav-btn{padding:.5rem 1.4rem;border:1px solid var(--ac);color:var(--ac);font-family:'Inter',sans-serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;background:transparent;cursor:none;transition:all .25s;text-decoration:none}
+.nav-btn:hover{background:var(--ac);color:var(--bg)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 5vw;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg::before{content:'';position:absolute;top:-20%;left:-10%;width:60vw;height:60vw;background:radial-gradient(circle,rgba(0,229,255,.06) 0%,transparent 65%);animation:pulse 8s ease-in-out infinite}
+.hero-bg::after{content:'';position:absolute;bottom:-10%;right:-5%;width:40vw;height:40vw;background:radial-gradient(circle,rgba(0,153,187,.05) 0%,transparent 65%);animation:pulse 10s ease-in-out infinite reverse}
+.grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.025) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%)}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+
+.hero-content{position:relative;z-index:1;max-width:900px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;border:1px solid var(--border2);color:var(--ac);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:2.5rem;opacity:0;animation:fadeUp .8s .2s forwards}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--ac);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3rem,7vw,6.5rem);line-height:1;letter-spacing:-.02em;margin-bottom:1.5rem}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line span{display:block;opacity:0;transform:translateY(110%);animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards}
+.hero h1 .line:nth-child(1) span{animation-delay:.35s}
+.hero h1 .line:nth-child(2) span{animation-delay:.5s}
+.hero h1 .line:nth-child(3) span{animation-delay:.65s}
+.hero h1 .ac{color:var(--ac)}
+@keyframes slideUp{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.hero-sub{font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:540px;margin-bottom:3rem;opacity:0;animation:fadeUp .8s .9s forwards;transform:translateY(20px)}
+.hero-ctas{display:flex;gap:1.2rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s 1.1s forwards;transform:translateY(20px)}
+.btn-primary{padding:.85rem 2.4rem;background:var(--ac);color:var(--bg);font-family:'Inter',sans-serif;font-size:.85rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all .25s;position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.15);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.btn-primary:hover::after{transform:scaleX(1)}
+.btn-secondary{padding:.85rem 2.4rem;border:1px solid var(--muted);color:var(--text);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all .25s}
+.btn-secondary:hover{border-color:var(--ac);color:var(--ac)}
+.hero-scroll{position:absolute;bottom:3rem;left:5vw;display:flex;align-items:center;gap:.8rem;color:var(--muted);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;opacity:0;animation:fadeUp .8s 1.5s forwards;transform:translateY(10px)}
+.scroll-line{width:40px;height:1px;background:var(--muted);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;inset:0;background:var(--ac);animation:scrollAnim 2s infinite;transform:scaleX(0);transform-origin:left}
+@keyframes scrollAnim{0%{transform:scaleX(0);transform-origin:left}50%{transform:scaleX(1);transform-origin:left}51%{transform-origin:right}100%{transform:scaleX(0);transform-origin:right}}
+
+/* STATS */
+.stats{padding:5rem 5vw;border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.stat{text-align:center;opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.stat.vis{opacity:1;transform:none}
+.stat-num{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:var(--ac);line-height:1}
+.stat-label{font-size:.78rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:.5rem}
+
+/* SECTION BASE */
+section{padding:8rem 5vw}
+.s-tag{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:1rem;opacity:0;transform:translateY(20px);transition:all .6s}
+.s-tag.vis{opacity:1;transform:none}
+.s-title{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1.15;margin-bottom:1.5rem;opacity:0;transform:translateY(25px);transition:all .7s .1s}
+.s-title.vis{opacity:1;transform:none}
+.s-desc{font-size:.98rem;color:var(--muted);line-height:1.9;max-width:520px;opacity:0;transform:translateY(20px);transition:all .7s .2s}
+.s-desc.vis{opacity:1;transform:none}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:5rem;border:1px solid var(--border)}
+.svc-card{padding:2.8rem 2.2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);position:relative;overflow:hidden;opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.svc-card.vis{opacity:1;transform:none}
+.svc-card:hover{background:var(--bg3);z-index:1}
+.svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,255,.04) 0%,transparent 60%);opacity:0;transition:opacity .4s}
+.svc-card:hover::before{opacity:1}
+.svc-card:hover .svc-num{color:var(--ac)}
+.svc-num{font-family:'Syne',sans-serif;font-size:.72rem;color:var(--muted);letter-spacing:.15em;margin-bottom:2rem;transition:color .3s}
+.svc-icon{font-size:2rem;margin-bottom:1.2rem;display:block}
+.svc-name{font-family:'Syne',sans-serif;font-weight:600;font-size:1.15rem;margin-bottom:.8rem;transition:color .3s}
+.svc-card:hover .svc-name{color:var(--ac)}
+.svc-desc{font-size:.85rem;color:var(--muted);line-height:1.8}
+
+/* PROCESS */
+.process-steps{margin-top:5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;position:relative}
+.process-steps::before{content:'';position:absolute;top:2rem;left:calc(2rem + 1px);right:calc(2rem + 1px);height:1px;background:linear-gradient(90deg,var(--ac),transparent 90%)}
+.step{opacity:0;transform:translateY(25px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.step.vis{opacity:1;transform:none}
+.step-num{width:64px;height:64px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:var(--ac);margin-bottom:1.5rem;background:var(--bg);position:relative;z-index:1}
+.step-name{font-family:'Syne',sans-serif;font-weight:600;font-size:1rem;margin-bottom:.6rem}
+.step-desc{font-size:.83rem;color:var(--muted);line-height:1.75}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:4rem}
+.why-card{padding:2rem 2rem 2rem;border:1px solid var(--border);background:var(--bg2);opacity:0;transform:translateY(20px);transition:all .6s;position:relative}
+.why-card.vis{opacity:1;transform:none}
+.why-card:hover{border-color:var(--border2)}
+.why-card-icon{font-size:1.6rem;margin-bottom:1rem;display:block}
+.why-card-name{font-family:'Syne',sans-serif;font-weight:600;font-size:1rem;margin-bottom:.5rem}
+.why-card-desc{font-size:.85rem;color:var(--muted);line-height:1.8}
+
+/* CTA */
+.cta-section{text-align:center;padding:10rem 5vw;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,229,255,.07) 0%,transparent 65%)}
+.cta-section .s-title{max-width:600px;margin:1rem auto 1.5rem}
+.cta-section .s-desc{margin:0 auto 3rem;text-align:center}
+.cta-avail{display:inline-flex;align-items:center;gap:.6rem;padding:.4rem 1.1rem;border:1px solid rgba(39,201,63,.3);color:#27C93F;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem}
+.cta-avail::before{content:'';width:5px;height:5px;background:#27C93F;border-radius:50%;animation:blink 2s infinite}
+
+/* FOOTER */
+footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.foot-copy{font-size:.75rem;color:var(--muted)}
+.foot-links{display:flex;gap:2rem}
+.foot-links a{font-size:.75rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--ac)}
+
+/* SCROLL ANIMATIONS */
+[data-delay="1"]{transition-delay:.1s}
+[data-delay="2"]{transition-delay:.2s}
+[data-delay="3"]{transition-delay:.3s}
+[data-delay="4"]{transition-delay:.4s}
+
+
+/* ═══════════════════════════════════
+   MOBILE RESPONSIVE – 480px & 768px
+═══════════════════════════════════ */
+@media(max-width:768px){
+  /* Hide desktop cursor */
+  .cur,.cur-ring{display:none}
+  body{cursor:auto}
+
+  /* Nav */
+  nav{padding:1.2rem 5vw}
+  nav.s{padding:.85rem 5vw}
+  .nav-links,.nav-btn{display:none}
+  .logo{font-size:1.1rem}
+
+  /* Hero */
+  .hero{padding:0 6vw;min-height:100svh}
+  .hero h1{font-size:clamp(2.4rem,10vw,4rem)}
+  .hero-badge{font-size:.62rem;margin-bottom:1.8rem}
+  .hero-sub{font-size:.92rem;margin-bottom:2rem}
+  .btn-primary,.btn-secondary{padding:.75rem 1.6rem;font-size:.78rem}
+  .hero-scroll{display:none}
+
+  /* Stats */
+  .stats{grid-template-columns:repeat(2,1fr);padding:3rem 6vw;gap:1.5rem}
+  .stat-num{font-size:2rem}
+
+  /* Sections */
+  section{padding:5rem 6vw}
+  .s-title{font-size:clamp(1.5rem,6vw,2.2rem)}
+  .s-desc{font-size:.9rem}
+
+  /* Services */
+  .services-grid{grid-template-columns:1fr;border:none;gap:1px}
+  .svc-card{border:1px solid var(--border);border-right:1px solid var(--border)}
+  .svc-name{font-size:1.05rem}
+
+  /* Process */
+  .process-steps{grid-template-columns:1fr;gap:1.8rem}
+  .process-steps::before{display:none}
+  .step-num{width:52px;height:52px;font-size:1rem}
+
+  /* Why grid */
+  .why-grid{grid-template-columns:1fr;gap:1rem}
+
+  /* CTA */
+  .cta-section{padding:6rem 6vw}
+  .cta-section .s-title{font-size:clamp(1.5rem,7vw,2rem)}
+  .cta-section .s-desc{font-size:.88rem}
+
+  /* Footer */
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 6vw}
+  .foot-links{justify-content:center}
+}
+
+/* ── Scroll Story mobile ── */
+@media(max-width:768px){
+  #scrollStory{height:480vh}
+
+  /* Phase dots – move to bottom */
+  #scrollStory [style*="right:2.8rem"]{
+    right:auto!important;top:auto!important;transform:none!important;
+    bottom:2rem!important;left:50%!important;transform:translateX(-50%)!important;
+    flex-direction:row!important;
+  }
+
+  /* Phase header smaller */
+  #phTitle{font-size:1.3rem!important}
+  #phTag{font-size:.58rem!important}
+
+  /* Phase 1 – shrink iPhone */
+  #iphMsg{width:220px!important}
+
+  /* Phase 2 – shrink editor */
+  #p2 > div{width:90vw!important;max-width:420px}
+  .cline{font-size:10.5px!important}
+
+  /* Phase 3 – stack devices vertically */
+  #p3 > div:not(#liveBadge){flex-direction:column!important;align-items:center!important;gap:1.5rem!important}
+  #mbk > div:first-child{width:280px!important}
+  #mbk > div:first-child > div:last-child{height:155px!important}
+  #iph3 > div{width:110px!important}
+  #iph3 > div > div:nth-child(3){height:180px!important}
+
+  /* Phase 4 – stack cards */
+  #p4 > div:first-child{grid-template-columns:1fr!important;max-width:280px!important;gap:.8rem!important}
+  #p4 > div:last-child{max-width:280px!important;padding:1rem!important}
+  .mcard{padding:1.1rem 1.2rem!important;border-radius:16px!important}
+}
+
+@media(max-width:480px){
+  .hero h1{font-size:clamp(2rem,11vw,3rem)}
+  .stats{grid-template-columns:repeat(2,1fr);gap:1.2rem;padding:2.5rem 6vw}
+  .stat-num{font-size:1.7rem}
+  section{padding:4rem 6vw}
+  #iphMsg{width:190px!important;border-radius:36px!important;padding:14px 10px 10px!important}
+}
+
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">KSKN</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#prozess">Prozess</a></li>
+    <li><a href="#warum">Warum ich</a></li>
+  </ul>
+  <a href="#kontakt" class="nav-btn">Projekt starten</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">● Verfügbar für neue Projekte</div>
+    <h1>
+      <span class="line"><span>Websites, die</span></span>
+      <span class="line"><span>verkaufen. Designs,</span></span>
+      <span class="line"><span>die <em class="ac">begeistern.</em></span></span>
+    </h1>
+    <p class="hero-sub">
+      Ich entwickle digitale Erlebnisse, die nicht nur gut aussehen – sondern messbar mehr Kunden bringen. Web, Design und Marketing – alles aus einer Hand.
+    </p>
+    <div class="hero-ctas">
+      <a href="#kontakt" class="btn-primary">Kostenloses Erstgespräch</a>
+      <a href="#services" class="btn-secondary">Meine Leistungen</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    Scrollen
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats" id="stats">
+  <div class="stat"><div class="stat-num" data-target="7">0</div><div class="stat-label">Projekte umgesetzt</div></div>
+  <div class="stat" data-delay="1"><div class="stat-num" data-target="100">0</div><div class="stat-label">Kunden-Zufriedenheit</div></div>
+  <div class="stat" data-delay="2"><div class="stat-num" data-target="3">0</div><div class="stat-label">Technologien täglich</div></div>
+  <div class="stat" data-delay="3"><div class="stat-num" data-target="24">0</div><div class="stat-label">h Reaktionszeit</div></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="s-tag reveal">— Leistungen</div>
+  <h2 class="s-title reveal">Was ich für dich tue</h2>
+  <p class="s-desc reveal">Von der ersten Idee bis zum fertigen Produkt – alles was du brauchst, damit dein Business online sichtbar und überzeugend ist.</p>
+
+  <div class="services-grid">
+    <div class="svc-card reveal">
+      <div class="svc-num">01</div>
+      <span class="svc-icon">⬡</span>
+      <div class="svc-name">Webentwicklung</div>
+      <p class="svc-desc">Schnelle, moderne Websites und Web-Apps – maßgeschneidert. Kein Template, kein Kompromiss.</p>
+    </div>
+    <div class="svc-card reveal" data-delay="1">
+      <div class="svc-num">02</div>
+      <span class="svc-icon">◈</span>
+      <div class="svc-name">UI / UX Design</div>
+      <p class="svc-desc">Interfaces, die Nutzer intuitiv durch dein Angebot führen – und sie am Ende zum Kauf bewegen.</p>
+    </div>
+    <div class="svc-card reveal" data-delay="2">
+      <div class="svc-num">03</div>
+      <span class="svc-icon">◭</span>
+      <div class="svc-name">Branding & Identität</div>
+      <p class="svc-desc">Logo, Farben, Typografie, Stil – eine visuelle Sprache, die dein Unternehmen unverwechselbar macht.</p>
+    </div>
+    <div class="svc-card reveal" data-delay="1">
+      <div class="svc-num">04</div>
+      <span class="svc-icon">◉</span>
+      <div class="svc-name">Digital Marketing</div>
+      <p class="svc-desc">Sichtbarkeit, die konvertiert. SEO, Content-Strategie und Kampagnen, die echte Ergebnisse liefern.</p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FLOW ANIMATION -->
+<section class="flow-section">
+  <div class="s-tag reveal">— So entsteht deine Website</div>
+  <h2 class="s-title reveal">Von der Idee zum fertigen Produkt</h2>
+  <p class="s-desc reveal">KSKN baut, du bekommst – auf jedem Gerät perfekt.</p>
+
+  <div class="flow-stage" id="flowStage">
+    <svg id="flowSvg" viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;display:block;margin:4rem auto 0;overflow:visible">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="softglow">
+          <feGaussianBlur stdDeviation="6" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <!-- Arrow marker -->
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="var(--ac)" opacity="0.7"/>
+        </marker>
+      </defs>
+
+      <!-- ============ STEP 1: STICKMAN + LAPTOP ============ -->
+      <g id="step1" opacity="0">
+        <!-- Glow behind -->
+        <circle cx="155" cy="200" r="90" fill="var(--ac)" opacity="0.04"/>
+
+        <!-- LAPTOP body -->
+        <rect x="90" y="200" width="130" height="88" rx="6" fill="#0D1420" stroke="var(--ac)" stroke-width="1.2" opacity="0.9"/>
+        <!-- Screen -->
+        <rect x="96" y="206" width="118" height="72" rx="3" fill="#04060A"/>
+        <!-- Browser bar -->
+        <rect x="96" y="206" width="118" height="11" rx="3" fill="#111B2A"/>
+        <circle cx="103" cy="211" r="2.5" fill="#FF5F56"/>
+        <circle cx="111" cy="211" r="2.5" fill="#FFBD2E"/>
+        <circle cx="119" cy="211" r="2.5" fill="#27C93F"/>
+        <rect x="127" y="208.5" width="60" height="5" rx="2" fill="#0D1420"/>
+        <!-- Website content in screen -->
+        <text x="107" y="234" font-family="Syne,sans-serif" font-weight="800" font-size="9" fill="var(--ac)">KSKN</text>
+        <rect x="107" y="240" width="55" height="3.5" rx="1.5" fill="#1A2232"/>
+        <rect x="107" y="246" width="40" height="3.5" rx="1.5" fill="#1A2232"/>
+        <rect x="107" y="256" width="26" height="8" rx="2" fill="var(--ac)" opacity="0.9"/>
+        <!-- Laptop hinge/base -->
+        <rect x="84" y="288" width="142" height="7" rx="2" fill="#0A0E1A" stroke="var(--ac)" stroke-width="0.8" opacity="0.6"/>
+        <rect x="80" y="294" width="150" height="5" rx="2" fill="#080C14" stroke="var(--ac)" stroke-width="0.6" opacity="0.4"/>
+
+        <!-- STICKMAN -->
+        <!-- Head -->
+        <circle cx="155" cy="148" r="16" fill="none" stroke="var(--ac)" stroke-width="2" filter="url(#glow)"/>
+        <!-- Face -->
+        <circle cx="150" cy="145" r="2" fill="var(--ac)" opacity="0.8"/>
+        <circle cx="160" cy="145" r="2" fill="var(--ac)" opacity="0.8"/>
+        <path d="M149,152 Q155,157 161,152" fill="none" stroke="var(--ac)" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Body -->
+        <line x1="155" y1="164" x2="155" y2="200" stroke="var(--ac)" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+        <!-- Arms - typing position -->
+        <line x1="155" y1="175" x2="130" y2="220" stroke="var(--ac)" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+        <line x1="155" y1="175" x2="178" y2="220" stroke="var(--ac)" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+        <!-- Legs -->
+        <line x1="155" y1="200" x2="138" y2="235" stroke="var(--ac)" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+        <line x1="155" y1="200" x2="170" y2="235" stroke="var(--ac)" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+
+        <!-- Typing dots animation -->
+        <circle class="type-dot" cx="130" cy="270" r="3" fill="var(--ac)" opacity="0"/>
+        <circle class="type-dot2" cx="142" cy="270" r="3" fill="var(--ac)" opacity="0"/>
+        <circle class="type-dot3" cx="154" cy="270" r="3" fill="var(--ac)" opacity="0"/>
+
+        <!-- Label -->
+        <text x="155" y="320" text-anchor="middle" font-family="Syne,sans-serif" font-weight="600" font-size="11" fill="var(--ac)" opacity="0.8">KSKN baut</text>
+        <text x="155" y="335" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#5A6A7E">deine Website</text>
+      </g>
+
+      <!-- ============ ARROW 1 ============ -->
+      <g id="arrow1" opacity="0">
+        <line id="line1" x1="240" y1="245" x2="240" y2="245" stroke="var(--ac)" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.6" marker-end="url(#arrow)"/>
+        <!-- Flying website icon -->
+        <g id="flyIcon1" opacity="0">
+          <rect x="-14" y="-10" width="28" height="20" rx="3" fill="#0D1420" stroke="var(--ac)" stroke-width="1.2"/>
+          <rect x="-14" y="-10" width="28" height="6" rx="3" fill="#111B2A"/>
+          <rect x="-8" y="0" width="16" height="2" rx="1" fill="#1A2232"/>
+          <rect x="-8" y="4" width="10" height="2" rx="1" fill="var(--ac)" opacity="0.7"/>
+          <text x="0" y="-5" text-anchor="middle" font-family="Syne,sans-serif" font-size="4" fill="var(--ac)" font-weight="800">KSKN</text>
+        </g>
+        <text id="arrow1label" x="360" y="230" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#5A6A7E" opacity="0">live gegangen!</text>
+      </g>
+
+      <!-- ============ STEP 2: CLIENT LAPTOP ============ -->
+      <g id="step2" opacity="0">
+        <circle cx="480" cy="230" r="90" fill="var(--ac)" opacity="0.04"/>
+        <!-- Laptop body -->
+        <rect x="415" y="200" width="130" height="88" rx="6" fill="#0D1420" stroke="var(--ac)" stroke-width="1.2" opacity="0.9"/>
+        <rect x="421" y="206" width="118" height="72" rx="3" fill="#04060A"/>
+        <rect x="421" y="206" width="118" height="11" rx="3" fill="#111B2A"/>
+        <circle cx="428" cy="211" r="2.5" fill="#FF5F56"/>
+        <circle cx="436" cy="211" r="2.5" fill="#FFBD2E"/>
+        <circle cx="444" cy="211" r="2.5" fill="#27C93F"/>
+        <rect x="452" y="208.5" width="60" height="5" rx="2" fill="#0D1420"/>
+        <!-- Website on screen -->
+        <text x="432" y="234" font-family="Syne,sans-serif" font-weight="800" font-size="9" fill="var(--ac)">KSKN</text>
+        <rect x="432" y="240" width="55" height="3.5" rx="1.5" fill="#1A2232"/>
+        <rect x="432" y="246" width="40" height="3.5" rx="1.5" fill="#1A2232"/>
+        <rect x="432" y="256" width="26" height="8" rx="2" fill="var(--ac)" opacity="0.9"/>
+        <!-- Satisfied customer stickman -->
+        <circle cx="480" cy="148" r="16" fill="none" stroke="#27C93F" stroke-width="2"/>
+        <circle cx="475" cy="145" r="2" fill="#27C93F"/>
+        <circle cx="485" cy="145" r="2" fill="#27C93F"/>
+        <path d="M473,153 Q480,160 487,153" fill="none" stroke="#27C93F" stroke-width="2" stroke-linecap="round"/>
+        <!-- Laptop base -->
+        <rect x="409" y="288" width="142" height="7" rx="2" fill="#0A0E1A" stroke="var(--ac)" stroke-width="0.8" opacity="0.6"/>
+        <rect x="405" y="294" width="150" height="5" rx="2" fill="#080C14" stroke="var(--ac)" stroke-width="0.6" opacity="0.4"/>
+        <!-- Body -->
+        <line x1="480" y1="164" x2="480" y2="200" stroke="#27C93F" stroke-width="2" stroke-linecap="round"/>
+        <line x1="480" y1="175" x2="458" y2="215" stroke="#27C93F" stroke-width="2" stroke-linecap="round"/>
+        <line x1="480" y1="175" x2="500" y2="190" stroke="#27C93F" stroke-width="2" stroke-linecap="round"/>
+        <!-- Thumbs up hand -->
+        <circle cx="506" cy="183" r="7" fill="none" stroke="#27C93F" stroke-width="1.5"/>
+        <text x="506" y="187" text-anchor="middle" font-size="8" fill="#27C93F">👍</text>
+        <line x1="480" y1="200" x2="463" y2="235" stroke="#27C93F" stroke-width="2" stroke-linecap="round"/>
+        <line x1="480" y1="200" x2="495" y2="235" stroke="#27C93F" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- WOW bubble -->
+        <g id="wowBubble" opacity="0">
+          <rect x="490" y="118" width="50" height="22" rx="11" fill="#0D1420" stroke="#27C93F" stroke-width="1.2"/>
+          <polygon points="496,140 503,140 499,148" fill="#0D1420" stroke="#27C93F" stroke-width="1.2"/>
+          <text x="515" y="133" text-anchor="middle" font-family="Syne,sans-serif" font-weight="700" font-size="9" fill="#27C93F">WOW!</text>
+        </g>
+
+        <text x="480" y="320" text-anchor="middle" font-family="Syne,sans-serif" font-weight="600" font-size="11" fill="var(--ac)" opacity="0.8">Dein Kunde</text>
+        <text x="480" y="335" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#5A6A7E">am Desktop</text>
+      </g>
+
+      <!-- ============ ARROW 2 ============ -->
+      <g id="arrow2" opacity="0">
+        <line id="line2" x1="565" y1="245" x2="565" y2="245" stroke="var(--ac)" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.6" marker-end="url(#arrow)"/>
+        <g id="flyIcon2" opacity="0">
+          <rect x="-14" y="-10" width="28" height="20" rx="3" fill="#0D1420" stroke="var(--ac)" stroke-width="1.2"/>
+          <rect x="-14" y="-10" width="28" height="6" rx="3" fill="#111B2A"/>
+          <rect x="-8" y="0" width="16" height="2" rx="1" fill="#1A2232"/>
+          <rect x="-8" y="4" width="10" height="2" rx="1" fill="var(--ac)" opacity="0.7"/>
+          <text x="0" y="-5" text-anchor="middle" font-family="Syne,sans-serif" font-size="4" fill="var(--ac)" font-weight="800">KSKN</text>
+        </g>
+        <text id="arrow2label" x="690" y="230" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#5A6A7E" opacity="0">auch mobil!</text>
+      </g>
+
+      <!-- ============ STEP 3: PHONE ============ -->
+      <g id="step3" opacity="0">
+        <circle cx="760" cy="220" r="80" fill="var(--ac)" opacity="0.04"/>
+        <!-- Phone outer -->
+        <rect x="720" y="150" width="80" height="150" rx="16" fill="#0D1420" stroke="var(--ac)" stroke-width="1.5"/>
+        <!-- Notch -->
+        <rect x="743" y="150" width="34" height="10" rx="0 0 8 8" fill="#080C14"/>
+        <circle cx="760" cy="155" r="3" fill="#1A2232"/>
+        <!-- Screen -->
+        <rect x="726" y="162" width="68" height="126" rx="8" fill="#04060A"/>
+        <!-- Content -->
+        <text x="736" y="178" font-family="Syne,sans-serif" font-weight="800" font-size="7" fill="var(--ac)">KSKN</text>
+        <line x1="736" y1="175" x2="788" y2="175" stroke="#111B2A" stroke-width="1"/>
+        <text x="736" y="194" font-family="Syne,sans-serif" font-weight="800" font-size="8" fill="#EEF2F7" opacity="0.9">Websites</text>
+        <text x="736" y="204" font-family="Syne,sans-serif" font-weight="800" font-size="8" fill="var(--ac)">begeistern.</text>
+        <rect x="736" y="210" width="38" height="3" rx="1.5" fill="#1A2232"/>
+        <rect x="736" y="215" width="28" height="3" rx="1.5" fill="#1A2232"/>
+        <rect x="736" y="224" width="45" height="10" rx="3" fill="var(--ac)" opacity="0.9"/>
+        <text x="758" y="232" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" fill="#04060A" font-weight="600">Anfragen</text>
+        <!-- Cards -->
+        <rect x="736" y="240" width="30" height="22" rx="3" fill="#0D1420" stroke="rgba(0,229,255,0.15)" stroke-width="1"/>
+        <rect x="770" y="240" width="24" height="22" rx="3" fill="#0D1420" stroke="rgba(0,229,255,0.15)" stroke-width="1"/>
+        <rect x="736" y="266" width="30" height="17" rx="3" fill="#0D1420" stroke="rgba(0,229,255,0.15)" stroke-width="1"/>
+        <rect x="770" y="266" width="24" height="17" rx="3" fill="#0D1420" stroke="rgba(0,229,255,0.15)" stroke-width="1"/>
+        <!-- Home bar -->
+        <rect x="741" y="295" width="38" height="3" rx="1.5" fill="#1A2232"/>
+
+        <text x="760" y="330" text-anchor="middle" font-family="Syne,sans-serif" font-weight="600" font-size="11" fill="var(--ac)" opacity="0.8">Dein Kunde</text>
+        <text x="760" y="345" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#5A6A7E">am Smartphone</text>
+
+        <!-- Stars rating -->
+        <g id="stars" opacity="0">
+          <text x="760" y="362" text-anchor="middle" font-size="12" fill="var(--ac)">★★★★★</text>
+        </g>
+      </g>
+
+      <!-- Step labels bottom -->
+      <g id="stepLabels" opacity="0">
+        <text x="155" y="370" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="#2A3A4E" letter-spacing="1">SCHRITT 1</text>
+        <text x="480" y="370" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="#2A3A4E" letter-spacing="1">SCHRITT 2</text>
+        <text x="760" y="370" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" fill="#2A3A4E" letter-spacing="1">SCHRITT 3</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<style>
+.flow-section{padding:8rem 5vw;border-top:1px solid var(--border)}
+</style>
+
+
+<!-- SCROLL STORY -->
+<section id="scrollStory" style="height:520vh;position:relative;">
+  <div id="scrollSticky" style="position:sticky;top:0;height:100vh;overflow:hidden;background:#04060A;display:flex;align-items:center;justify-content:center;">
+
+    <style>
+      /* Phase dots */
+      .pdot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.18);transition:all .5s cubic-bezier(.16,1,.3,1)}
+      .pdot.act{background:var(--ac);transform:scale(1.6)}
+
+      /* Story phases */
+      .sp{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:none;pointer-events:none;}
+
+      /* iMessage */
+      .imsg{max-width:210px;padding:11px 15px;font-size:13.5px;line-height:1.45;border-radius:20px;letter-spacing:-.01em;will-change:transform,opacity}
+      .from-them{background:#262628;color:#fff;border-bottom-left-radius:5px;align-self:flex-start}
+      .from-me{background:var(--ac);color:#000;border-bottom-right-radius:5px;align-self:flex-end;font-weight:500}
+      .msg-time{font-size:11px;color:rgba(255,255,255,.28);text-align:center;letter-spacing:.02em}
+
+      .typing-dots{display:flex;gap:3px;padding:10px 14px;background:#262628;border-radius:20px;border-bottom-left-radius:5px;width:50px;align-self:flex-start}
+      .typing-dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);animation:tdot 1.1s ease-in-out infinite}
+      .typing-dots span:nth-child(2){animation-delay:.18s}
+      .typing-dots span:nth-child(3){animation-delay:.36s}
+      @keyframes tdot{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+
+      /* Code */
+      .cline{font-family:'SF Mono','Fira Code','Courier New',monospace;font-size:12.5px;line-height:1.9;white-space:nowrap;will-change:opacity,transform}
+
+      /* Metric cards */
+      .mcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:22px;padding:1.4rem 1.5rem;backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);will-change:opacity,transform}
+
+      /* Bars */
+      .mbar{border-radius:4px 4px 0 0;will-change:height,opacity}
+
+      @keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(39,201,63,.4)}70%{box-shadow:0 0 0 8px rgba(39,201,63,0)}}
+    </style>
+
+    <!-- ── PHASE DOTS ── -->
+    <div style="position:absolute;right:2.8rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;z-index:30">
+      <div class="pdot act" id="pd0"></div>
+      <div class="pdot" id="pd1"></div>
+      <div class="pdot" id="pd2"></div>
+      <div class="pdot" id="pd3"></div>
+    </div>
+
+    <!-- ── PHASE HEADER ── -->
+    <div style="position:absolute;top:3.2rem;width:100%;text-align:center;z-index:20;pointer-events:none">
+      <div id="phTag" style="font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ac);transition:opacity .5s,transform .5s"></div>
+      <div id="phTitle" style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.9rem;margin-top:.4rem;transition:opacity .5s .08s,transform .5s .08s"></div>
+    </div>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- PHASE 1 – DER AUFTRAG             -->
+    <!-- ══════════════════════════════════ -->
+    <div class="sp" id="p1">
+      <!-- iPhone frame -->
+      <div id="iphMsg" style="width:270px;background:linear-gradient(160deg,#1C1C1E,#141414);border-radius:48px;border:1.5px solid rgba(255,255,255,.1);padding:18px 14px 14px;box-shadow:0 50px 100px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04),inset 0 1px 0 rgba(255,255,255,.1)">
+        <!-- Dynamic Island -->
+        <div style="width:110px;height:28px;background:#000;border-radius:20px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;gap:6px">
+          <div style="width:9px;height:9px;border-radius:50%;background:#111;border:1.5px solid #222"></div>
+          <div style="width:60px;height:6px;background:#0A0A0A;border-radius:3px"></div>
+        </div>
+        <!-- Status bar -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:0 6px;margin-bottom:10px">
+          <span style="font-size:10px;font-weight:600;color:#fff;letter-spacing:-.02em">9:41</span>
+          <div style="display:flex;gap:5px;align-items:center">
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><rect x="0" y="4" width="2" height="6" rx="1" fill="white" opacity=".4"/><rect x="3" y="2.5" width="2" height="7.5" rx="1" fill="white" opacity=".6"/><rect x="6" y="1" width="2" height="9" rx="1" fill="white" opacity=".8"/><rect x="9" y="0" width="2" height="10" rx="1" fill="white"/></svg>
+            <svg width="15" height="10" viewBox="0 0 15 10" fill="white"><path d="M7.5 2C9.8 2 11.9 3 13.3 4.7L14.5 3.3C12.8 1.3 10.3 0 7.5 0S2.2 1.3.5 3.3L1.7 4.7C3.1 3 5.2 2 7.5 2Z" opacity=".4"/><path d="M7.5 5C9 5 10.4 5.7 11.3 6.8L12.5 5.4C11.3 4 9.5 3 7.5 3S3.7 4 2.5 5.4L3.7 6.8C4.6 5.7 6 5 7.5 5Z" opacity=".7"/><circle cx="7.5" cy="9" r="1.5"/></svg>
+            <svg width="22" height="11" viewBox="0 0 22 11"><rect x="0" y="0.5" width="18.5" height="10" rx="3" stroke="white" stroke-opacity=".35" stroke-width="1"/><rect x="1.2" y="1.7" width="12" height="7.6" rx="2" fill="white"/><rect x="19.5" y="3.5" width="2" height="4" rx="1" fill="white" fill-opacity=".4"/></svg>
+          </div>
+        </div>
+        <!-- Chat header -->
+        <div style="text-align:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.06)">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--ac),#006888);margin:0 auto 5px;display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-weight:700;font-size:12px;color:#000">K</div>
+          <div style="font-size:12px;font-weight:600;color:#fff">Kunde</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.35);margin-top:1px">iMessage</div>
+        </div>
+        <!-- Messages -->
+        <div id="msgWrap" style="display:flex;flex-direction:column;gap:7px;min-height:195px;padding:0 2px">
+          <div class="msg-time" id="mt0" style="will-change:opacity,transform">Heute, 14:23</div>
+          <div class="imsg from-them" id="m0" style="will-change:opacity,transform">Hallo! Ich brauche eine Website für mein Business 💼</div>
+          <div class="typing-dots" id="mtyp"><span></span><span></span><span></span></div>
+          <div class="imsg from-me" id="m1" style="will-change:opacity,transform">Kein Problem! Ich kümmere mich darum 🚀</div>
+          <div class="imsg from-me" id="m2" style="will-change:opacity,transform">Schick mir deine Ideen – wir legen gleich los</div>
+          <div class="imsg from-them" id="m3" style="will-change:opacity,transform">Super, ich freue mich! 🎉</div>
+          <div id="mread" style="font-size:10px;color:rgba(255,255,255,.28);text-align:right;letter-spacing:.02em;will-change:opacity">Gelesen · 14:24</div>
+        </div>
+        <!-- Home bar -->
+        <div style="width:100px;height:4px;background:rgba(255,255,255,.25);border-radius:2px;margin:14px auto 2px"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- PHASE 2 – ENTWICKLUNG             -->
+    <!-- ══════════════════════════════════ -->
+    <div class="sp" id="p2">
+      <div style="width:580px;background:#161616;border-radius:14px;border:1px solid rgba(255,255,255,.07);overflow:hidden;box-shadow:0 50px 100px rgba(0,0,0,.6)">
+        <!-- Title bar -->
+        <div style="height:40px;background:#1E1E1E;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;padding:0 16px;gap:7px">
+          <div style="width:11px;height:11px;border-radius:50%;background:#FF5F56"></div>
+          <div style="width:11px;height:11px;border-radius:50%;background:#FFBD2E"></div>
+          <div style="width:11px;height:11px;border-radius:50%;background:#27C93F"></div>
+          <div style="flex:1;display:flex;justify-content:center">
+            <span style="font-size:11.5px;color:rgba(255,255,255,.28);letter-spacing:.02em">index.html — KSKN</span>
+          </div>
+        </div>
+        <!-- Editor -->
+        <div style="display:flex">
+          <!-- Line numbers -->
+          <div style="padding:1.1rem .6rem 1.1rem .9rem;background:#141414;text-align:right;border-right:1px solid rgba(255,255,255,.05)">
+            <div id="ln0" class="cline" style="color:#3A3A3A"> 1</div>
+            <div id="ln1" class="cline" style="color:#3A3A3A"> 2</div>
+            <div id="ln2" class="cline" style="color:#3A3A3A"> 3</div>
+            <div id="ln3" class="cline" style="color:#3A3A3A"> 4</div>
+            <div id="ln4" class="cline" style="color:#3A3A3A"> 5</div>
+            <div id="ln5" class="cline" style="color:#3A3A3A"> 6</div>
+            <div id="ln6" class="cline" style="color:#3A3A3A"> 7</div>
+          </div>
+          <!-- Code -->
+          <div style="padding:1.1rem 1.4rem;flex:1">
+            <div id="cl0" class="cline" style="will-change:opacity,transform"><span style="color:#569CD6">&lt;!DOCTYPE</span> <span style="color:#9CDCFE">html</span><span style="color:#569CD6">&gt;</span></div>
+            <div id="cl1" class="cline" style="will-change:opacity,transform"><span style="color:#569CD6">&lt;html</span> <span style="color:#9CDCFE">lang</span>=<span style="color:#CE9178">"de"</span><span style="color:#569CD6">&gt;</span></div>
+            <div id="cl2" class="cline" style="will-change:opacity,transform">&nbsp;&nbsp;<span style="color:#569CD6">&lt;title&gt;</span><span style="color:#CE9178">KSKN – Digitale Exzellenz</span><span style="color:#569CD6">&lt;/title&gt;</span></div>
+            <div id="cl3" class="cline" style="will-change:opacity,transform">&nbsp;&nbsp;<span style="color:#6A9955">// Websites, die begeistern</span></div>
+            <div id="cl4" class="cline" style="will-change:opacity,transform"><span style="color:#C586C0">.hero</span> { <span style="color:#9CDCFE">animation</span>: <span style="color:#CE9178">magic 1s ease-in-out</span> }</div>
+            <div id="cl5" class="cline" style="will-change:opacity,transform"><span style="color:#569CD6">&lt;section</span> <span style="color:#9CDCFE">class</span>=<span style="color:#CE9178">"hero"</span><span style="color:#569CD6">&gt;</span></div>
+            <div id="cl6" class="cline" style="will-change:opacity,transform">&nbsp;&nbsp;<span style="color:#569CD6">&lt;h1&gt;</span>Websites, die <span style="color:#CE9178">begeistern</span><span style="color:#569CD6">&lt;/h1&gt;</span></div>
+          </div>
+        </div>
+        <!-- Build bar -->
+        <div style="padding:.7rem 1.4rem;background:#1A1A1A;border-top:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:12px">
+          <span style="font-size:10.5px;color:rgba(255,255,255,.35);letter-spacing:.1em">BUILDING</span>
+          <div style="flex:1;height:2px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden">
+            <div id="bBar" style="height:100%;background:var(--ac);width:0%;transition:none;border-radius:2px"></div>
+          </div>
+          <span id="bPct" style="font-size:10.5px;color:var(--ac);min-width:30px;text-align:right">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- PHASE 3 – LAUNCH                  -->
+    <!-- ══════════════════════════════════ -->
+    <div class="sp" id="p3">
+      <!-- LIVE badge -->
+      <div id="liveBadge" style="position:absolute;top:6rem;display:flex;align-items:center;gap:.5rem;padding:.3rem 1rem;background:rgba(39,201,63,.1);border:1px solid rgba(39,201,63,.25);color:#27C93F;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;will-change:opacity,transform">
+        <span style="width:6px;height:6px;border-radius:50%;background:#27C93F;display:inline-block;animation:livePulse 1.8s infinite"></span>
+        Website ist live
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:3.5rem">
+        <!-- MacBook -->
+        <div id="mbk" style="will-change:opacity,transform">
+          <div style="width:420px;background:#1E1E1E;border-radius:12px 12px 0 0;border:1.5px solid #3A3A3C;border-bottom:none;padding:9px 11px 0;box-shadow:0 -6px 30px rgba(0,0,0,.3)">
+            <div style="display:flex;gap:6px;margin-bottom:7px">
+              <div style="width:11px;height:11px;border-radius:50%;background:#FF5F56"></div>
+              <div style="width:11px;height:11px;border-radius:50%;background:#FFBD2E"></div>
+              <div style="width:11px;height:11px;border-radius:50%;background:#27C93F"></div>
+              <div style="flex:1;background:#111;border-radius:4px;height:16px;display:flex;align-items:center;padding:0 8px;margin-left:6px">
+                <span style="font-size:9px;color:rgba(255,255,255,.25)">kskn.de</span>
+              </div>
+            </div>
+            <div style="background:#04060A;border-radius:4px 4px 0 0;height:230px;padding:16px;overflow:hidden">
+              <div style="font-family:Syne,sans-serif;font-weight:800;font-size:11px;color:var(--ac);margin-bottom:10px">KSKN</div>
+              <div style="font-family:Syne,sans-serif;font-size:16px;font-weight:700;line-height:1.2;margin-bottom:8px">Websites, die<br><span style="color:var(--ac)">begeistern.</span></div>
+              <div style="height:4px;background:#1A2232;border-radius:2px;width:72%;margin-bottom:5px"></div>
+              <div style="height:4px;background:#1A2232;border-radius:2px;width:52%;margin-bottom:14px"></div>
+              <div style="display:inline-block;padding:7px 16px;background:var(--ac);font-size:8px;color:#000;font-weight:600;border-radius:2px;margin-bottom:16px">Anfragen →</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+                <div style="background:#0D1420;border:1px solid rgba(0,229,255,.08);border-radius:4px;padding:9px"><div style="height:3px;background:#1A2232;width:80%;margin-bottom:4px;border-radius:1px"></div><div style="height:3px;background:#1A2232;width:60%;border-radius:1px"></div></div>
+                <div style="background:#0D1420;border:1px solid rgba(0,229,255,.08);border-radius:4px;padding:9px"><div style="height:3px;background:#1A2232;width:80%;margin-bottom:4px;border-radius:1px"></div><div style="height:3px;background:#1A2232;width:60%;border-radius:1px"></div></div>
+                <div style="background:#0D1420;border:1px solid rgba(0,229,255,.08);border-radius:4px;padding:9px"><div style="height:3px;background:#1A2232;width:80%;margin-bottom:4px;border-radius:1px"></div><div style="height:3px;background:#1A2232;width:60%;border-radius:1px"></div></div>
+                <div style="background:#0D1420;border:1px solid rgba(0,229,255,.08);border-radius:4px;padding:9px"><div style="height:3px;background:#1A2232;width:80%;margin-bottom:4px;border-radius:1px"></div><div style="height:3px;background:#1A2232;width:60%;border-radius:1px"></div></div>
+              </div>
+            </div>
+          </div>
+          <div style="width:436px;height:14px;background:linear-gradient(#1E1E1E,#161616);border-radius:0 0 3px 3px;margin-left:-8px;border:1.5px solid #3A3A3C;border-top:none"></div>
+          <div style="width:460px;height:7px;background:#111;border-radius:0 0 8px 8px;margin-left:-20px;border-bottom:1px solid #2A2A2A"></div>
+        </div>
+        <!-- iPhone -->
+        <div id="iph3" style="will-change:opacity,transform">
+          <div style="width:148px;background:#1E1E1E;border-radius:36px;border:1.5px solid #3A3A3C;padding:12px;box-shadow:0 30px 60px rgba(0,0,0,.5)">
+            <div style="width:64px;height:22px;background:#111;border-radius:0 0 16px 16px;margin:0 auto 9px;display:flex;align-items:center;justify-content:center">
+              <div style="width:8px;height:8px;border-radius:50%;background:#0A0A0A;border:1px solid #1A1A1A"></div>
+            </div>
+            <div style="background:#04060A;border-radius:20px;height:248px;padding:11px;overflow:hidden">
+              <div style="font-family:Syne,sans-serif;font-weight:800;font-size:7.5px;color:var(--ac);margin-bottom:8px">KSKN</div>
+              <div style="font-size:9px;font-weight:700;line-height:1.3;margin-bottom:6px">Websites,<br>die <span style="color:var(--ac)">begeistern.</span></div>
+              <div style="height:3px;background:#1A2232;border-radius:2px;width:80%;margin-bottom:4px"></div>
+              <div style="height:3px;background:#1A2232;border-radius:2px;width:60%;margin-bottom:9px"></div>
+              <div style="padding:6px 0;background:var(--ac);text-align:center;font-size:6.5px;color:#000;font-weight:600;border-radius:2px;margin-bottom:10px">Anfragen</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+                <div style="background:#0D1420;border:1px solid rgba(0,229,255,.08);border-radius:3px;padding:6px"><div style="height:2.5px;background:#1A2232;width:80%;margin-bottom:3px;border-radius:1px"></div><div style="height:2.5px;background:#1A2232;width:55%;border-radius:1px"></div></div>
+                <div style="background:#0D1420;border:1px solid rgba(0,229,255,.08);border-radius:3px;padding:6px"><div style="height:2.5px;background:#1A2232;width:80%;margin-bottom:3px;border-radius:1px"></div><div style="height:2.5px;background:#1A2232;width:55%;border-radius:1px"></div></div>
+                <div style="background:#0D1420;border:1px solid rgba(0,229,255,.08);border-radius:3px;padding:6px"><div style="height:2.5px;background:#1A2232;width:80%;margin-bottom:3px;border-radius:1px"></div><div style="height:2.5px;background:#1A2232;width:55%;border-radius:1px"></div></div>
+                <div style="background:#0D1420;border:1px solid rgba(0,229,255,.08);border-radius:3px;padding:6px"><div style="height:2.5px;background:#1A2232;width:80%;margin-bottom:3px;border-radius:1px"></div><div style="height:2.5px;background:#1A2232;width:55%;border-radius:1px"></div></div>
+              </div>
+            </div>
+            <div style="width:52px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin:10px auto 2px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- PHASE 4 – MARKETING               -->
+    <!-- ══════════════════════════════════ -->
+    <div class="sp" id="p4">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.1rem;max-width:680px;width:100%">
+        <!-- Instagram -->
+        <div class="mcard" id="mc0" style="will-change:opacity,transform">
+          <div style="display:flex;align-items:center;gap:.55rem;margin-bottom:1rem">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <defs><radialGradient id="igG" cx="30%" cy="110%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs>
+              <rect width="24" height="24" rx="6" fill="url(#igG)"/>
+              <circle cx="12" cy="12" r="4.5" fill="none" stroke="white" stroke-width="1.8"/>
+              <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+            </svg>
+            <span style="font-size:.82rem;font-weight:500;letter-spacing:-.01em">Instagram</span>
+          </div>
+          <div id="igN" style="font-family:Syne,sans-serif;font-weight:700;font-size:2rem;color:var(--ac);letter-spacing:-.03em">0</div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">Reichweite / Woche</div>
+          <div style="margin-top:.9rem;height:2px;background:rgba(255,255,255,.06);border-radius:1px;overflow:hidden">
+            <div id="igBar" style="height:100%;background:linear-gradient(90deg,#d6249f,#fd5949);width:0%;transition:width 1.4s .2s cubic-bezier(.16,1,.3,1)"></div>
+          </div>
+        </div>
+        <!-- Google -->
+        <div class="mcard" id="mc1" style="will-change:opacity,transform">
+          <div style="display:flex;align-items:center;gap:.55rem;margin-bottom:1rem">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect width="24" height="24" rx="6" fill="#fff"/>
+              <path d="M20.5 12.2c0-.6-.1-1.2-.2-1.7H12v3.3h4.8c-.2 1.1-.9 2-1.8 2.6v2.1h2.9c1.7-1.5 2.6-3.8 2.6-6.3z" fill="#4285F4"/>
+              <path d="M12 21c2.4 0 4.4-.8 5.9-2.1l-2.9-2.2c-.8.5-1.8.8-3 .8-2.3 0-4.2-1.5-4.9-3.6H4.2v2.3C5.7 19.3 8.6 21 12 21z" fill="#34A853"/>
+              <path d="M7.1 13.9c-.2-.5-.3-1.1-.3-1.7s.1-1.2.3-1.7V8.2H4.2C3.4 9.6 3 11.2 3 12.9s.4 3.3 1.2 4.7l2.9-2.2-.1-.5z" fill="#FBBC05"/>
+              <path d="M12 7.4c1.3 0 2.5.4 3.4 1.3l2.5-2.5C16.4 4.7 14.4 4 12 4 8.6 4 5.7 5.7 4.2 8.3l2.9 2.2C7.8 8.9 9.7 7.4 12 7.4z" fill="#EA4335"/>
+            </svg>
+            <span style="font-size:.82rem;font-weight:500;letter-spacing:-.01em">Google</span>
+          </div>
+          <div style="font-family:Syne,sans-serif;font-weight:700;font-size:2rem;color:var(--ac);letter-spacing:-.03em">#1</div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">Suchergebnis lokal</div>
+          <div style="margin-top:.9rem;height:2px;background:rgba(255,255,255,.06);border-radius:1px;overflow:hidden">
+            <div id="gBar" style="height:100%;background:linear-gradient(90deg,#4285F4,#34A853);width:0%;transition:width 1.4s .4s cubic-bezier(.16,1,.3,1)"></div>
+          </div>
+        </div>
+        <!-- Besucher -->
+        <div class="mcard" id="mc2" style="will-change:opacity,transform">
+          <div style="display:flex;align-items:center;gap:.55rem;margin-bottom:1rem">
+            <div style="width:24px;height:24px;border-radius:6px;background:var(--ac);display:flex;align-items:center;justify-content:center">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="4.5" r="3" fill="#000"/><path d="M1 13c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#000" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg>
+            </div>
+            <span style="font-size:.82rem;font-weight:500;letter-spacing:-.01em">Besucher</span>
+          </div>
+          <div id="visN" style="font-family:Syne,sans-serif;font-weight:700;font-size:2rem;color:var(--ac);letter-spacing:-.03em">0</div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">Website / Monat</div>
+          <div style="margin-top:.9rem;height:2px;background:rgba(255,255,255,.06);border-radius:1px;overflow:hidden">
+            <div id="vBar" style="height:100%;background:var(--ac);width:0%;transition:width 1.4s .6s cubic-bezier(.16,1,.3,1)"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Chart -->
+      <div style="max-width:680px;width:100%;margin-top:1.2rem;padding:1.2rem 1.4rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:18px">
+        <div style="font-size:.68rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem">Anfragen pro Monat</div>
+        <div style="display:flex;align-items:flex-end;gap:.5rem;height:56px">
+          <div id="br0" style="flex:1;background:var(--ac);border-radius:3px 3px 0 0;opacity:.2;height:15%;transition:height 1.2s .1s,opacity 1s .1s cubic-bezier(.16,1,.3,1)"></div>
+          <div id="br1" style="flex:1;background:var(--ac);border-radius:3px 3px 0 0;opacity:.35;height:28%;transition:height 1.2s .18s,opacity 1s .18s cubic-bezier(.16,1,.3,1)"></div>
+          <div id="br2" style="flex:1;background:var(--ac);border-radius:3px 3px 0 0;opacity:.5;height:44%;transition:height 1.2s .26s,opacity 1s .26s cubic-bezier(.16,1,.3,1)"></div>
+          <div id="br3" style="flex:1;background:var(--ac);border-radius:3px 3px 0 0;opacity:.65;height:60%;transition:height 1.2s .34s,opacity 1s .34s cubic-bezier(.16,1,.3,1)"></div>
+          <div id="br4" style="flex:1;background:var(--ac);border-radius:3px 3px 0 0;opacity:.8;height:78%;transition:height 1.2s .42s,opacity 1s .42s cubic-bezier(.16,1,.3,1)"></div>
+          <div id="br5" style="flex:1;background:var(--ac);border-radius:3px 3px 0 0;opacity:1;height:100%;transition:height 1.2s .5s,opacity 1s .5s cubic-bezier(.16,1,.3,1)"></div>
+        </div>
+        <div style="display:flex;gap:.5rem;margin-top:.5rem">
+          <div style="flex:1;text-align:center;font-size:.6rem;color:var(--muted)">Jan</div>
+          <div style="flex:1;text-align:center;font-size:.6rem;color:var(--muted)">Feb</div>
+          <div style="flex:1;text-align:center;font-size:.6rem;color:var(--muted)">Mär</div>
+          <div style="flex:1;text-align:center;font-size:.6rem;color:var(--muted)">Apr</div>
+          <div style="flex:1;text-align:center;font-size:.6rem;color:var(--muted)">Mai</div>
+          <div style="flex:1;text-align:center;font-size:.6rem;color:var(--muted)">Jun</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /scrollSticky -->
+</section>
+
+<script>
+(function(){
+  const section = document.getElementById('scrollStory');
+  if(!section) return;
+
+  const PHASES = 4;
+  const phases = [
+    { tag:'01 — Der Auftrag',    title:'Der erste Kontakt' },
+    { tag:'02 — Die Entwicklung',title:'Ich baue deine Website' },
+    { tag:'03 — Der Launch',     title:'Deine Website ist live' },
+    { tag:'04 — Das Marketing',  title:'Kunden finden dich' },
+  ];
+
+  let lastPhIdx = -1;
+  let p4Done = false;
+
+  function getProgress(){
+    const rect = section.getBoundingClientRect();
+    const total = section.offsetHeight - window.innerHeight;
+    return Math.max(0, Math.min(1, -rect.top / total));
+  }
+
+  function mr(v,a,b,c,d){
+    return c + (d-c)*Math.max(0,Math.min(1,(v-a)/(b-a)));
+  }
+
+  // Phase opacity with smooth crossfade
+  function phOp(p, i){
+    const s = i/PHASES, e=(i+1)/PHASES, f=0.055;
+    if(p<s-f) return 0;
+    if(p<s+f) return mr(p,s-f,s+f,0,1);
+    if(p<e-f) return 1;
+    if(p<e+f) return mr(p,e-f,e+f,1,0);
+    return 0;
+  }
+
+  function lp(p,i){
+    return Math.max(0,Math.min(1,(p-i/PHASES)/((i+1)/PHASES-i/PHASES)));
+  }
+
+  // ── Phase 1 drivers ──
+  function elOp(id,v){ const e=document.getElementById(id); if(e){ e.style.opacity=v; e.style.transform=v>0.05?'translateY(0)':'translateY(6px)'; e.style.transition='opacity .35s,transform .35s'; }}
+  function driveP1(t){
+    elOp('mt0', mr(t,.02,.12,0,1));
+    elOp('m0',  mr(t,.1,.22,0,1));
+    const typ=document.getElementById('mtyp');
+    const tOp = mr(t,.25,.35,0,1) - mr(t,.48,.58,0,1);
+    if(typ){ typ.style.opacity=Math.max(0,tOp); }
+    elOp('m1',  mr(t,.52,.64,0,1));
+    elOp('m2',  mr(t,.67,.78,0,1));
+    elOp('m3',  mr(t,.8,.9,0,1));
+    elOp('mread',mr(t,.9,.98,0,1));
+  }
+
+  // ── Phase 2 drivers ──
+  function driveP2(t){
+    for(let i=0;i<7;i++){
+      const el=document.getElementById('cl'+i);
+      const ln=document.getElementById('ln'+i);
+      const v=mr(t,.04+i*.1,.1+i*.1,0,1);
+      if(el){ el.style.opacity=v; el.style.transform=v>.05?'translateX(0)':'translateX(-6px)'; el.style.transition='opacity .3s,transform .3s'; }
+      if(ln){ ln.style.opacity=v>.1?'.45':'0'; }
+    }
+    const pct=Math.round(mr(t,.08,.96,0,100));
+    const b=document.getElementById('bBar'), p2=document.getElementById('bPct');
+    if(b) b.style.width=pct+'%';
+    if(p2) p2.textContent=pct+'%';
+  }
+
+  // ── Phase 3 drivers ──
+  function driveP3(t){
+    const mbk=document.getElementById('mbk');
+    const iph=document.getElementById('iph3');
+    const badge=document.getElementById('liveBadge');
+    const mv=mr(t,.05,.4,0,1);
+    if(mbk){ mbk.style.opacity=mv; mbk.style.transform=`translateY(${mr(t,.05,.4,20,0)}px) scale(${mr(t,.05,.4,.94,1)})`; mbk.style.transition='none'; }
+    const iv=mr(t,.2,.55,0,1);
+    if(iph){ iph.style.opacity=iv; iph.style.transform=`translateX(${mr(t,.2,.55,28,0)}px) scale(${mr(t,.2,.55,.92,1)})`; iph.style.transition='none'; }
+    const bv=mr(t,.65,.85,0,1);
+    if(badge){ badge.style.opacity=bv; badge.style.transform=`translateY(${mr(t,.65,.85,8,0)}px)`; badge.style.transition='none'; }
+  }
+
+  // ── Phase 4 drivers ──
+  function driveP4(t){
+    ['mc0','mc1','mc2'].forEach((id,i)=>{
+      const el=document.getElementById(id);
+      const v=mr(t,.06+i*.12,.2+i*.12,0,1);
+      if(el){ el.style.opacity=v; el.style.transform=`translateY(${mr(t,.06+i*.12,.2+i*.12,18,0)}px)`; el.style.transition='none'; }
+    });
+    if(t>.35 && !p4Done){
+      p4Done=true;
+      animNum('igN',0,12400,2000);
+      animNum('visN',0,3800,2200);
+      const bars=['igBar','gBar','vBar'];
+      bars.forEach(b=>{ const el=document.getElementById(b); if(el) el.style.width='100%'; });
+    }
+    if(t<.1) p4Done=false;
+  }
+
+  function animNum(id,from,to,dur){
+    const el=document.getElementById(id);
+    if(!el) return;
+    const start=performance.now();
+    (function step(now){
+      const t=Math.min((now-start)/dur,1);
+      const ease=1-Math.pow(1-t,4);
+      el.textContent=Math.floor(from+(to-from)*ease).toLocaleString('de-DE');
+      if(t<1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+
+  // Header update
+  const tagEl=document.getElementById('phTag');
+  const titleEl=document.getElementById('phTitle');
+  function setHeader(i){
+    if(tagEl){ tagEl.style.opacity='0'; tagEl.style.transform='translateY(-7px)'; }
+    if(titleEl){ titleEl.style.opacity='0'; titleEl.style.transform='translateY(-7px)'; }
+    setTimeout(()=>{
+      if(tagEl){ tagEl.textContent=phases[i].tag; tagEl.style.opacity='1'; tagEl.style.transform='translateY(0)'; }
+      if(titleEl){ titleEl.textContent=phases[i].title; titleEl.style.opacity='1'; titleEl.style.transform='translateY(0)'; }
+    },180);
+    for(let k=0;k<4;k++){
+      const d=document.getElementById('pd'+k);
+      if(d) d.classList.toggle('act',k===i);
+    }
+  }
+
+  // Init header
+  if(tagEl){ tagEl.textContent=phases[0].tag; tagEl.style.opacity='1'; tagEl.style.transform='translateY(0)'; }
+  if(titleEl){ titleEl.textContent=phases[0].title; titleEl.style.opacity='1'; titleEl.style.transform='translateY(0)'; }
+
+  function update(){
+    const p=getProgress();
+    const phIdx=Math.min(PHASES-1,Math.floor(p*PHASES+.08));
+
+    if(phIdx!==lastPhIdx){ lastPhIdx=phIdx; setHeader(phIdx); }
+
+    // Phase opacities & visibility
+    for(let i=0;i<PHASES;i++){
+      const el=document.getElementById('p'+(i+1));
+      if(!el) continue;
+      const op=phOp(p,i);
+      el.style.opacity=op;
+      el.style.visibility=op>.001?'visible':'hidden';
+    }
+
+    driveP1(lp(p,0));
+    driveP2(lp(p,1));
+    driveP3(lp(p,2));
+    driveP4(lp(p,3));
+
+    requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+})();
+</script>
+
+<!-- PROCESS -->
+<section id="prozess">
+  <div class="s-tag reveal">— Prozess</div>
+  <h2 class="s-title reveal">Wie wir zusammenarbeiten</h2>
+  <p class="s-desc reveal">Kein Chaos, keine Überraschungen. Klare Schritte, transparente Kommunikation – du weißt immer, wo wir stehen.</p>
+
+  <div class="process-steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <div class="step-name">Erstgespräch</div>
+      <p class="step-desc">Wir besprechen deine Ziele, Zielgruppe und was du dir vorstellst. Kostenlos und unverbindlich.</p>
+    </div>
+    <div class="step reveal" data-delay="1">
+      <div class="step-num">02</div>
+      <div class="step-name">Konzept & Angebot</div>
+      <p class="step-desc">Du bekommst ein klares Konzept mit Zeitplan und festem Preis – keine versteckten Kosten.</p>
+    </div>
+    <div class="step reveal" data-delay="2">
+      <div class="step-num">03</div>
+      <div class="step-name">Design & Entwicklung</div>
+      <p class="step-desc">Ich arbeite schnell und halte dich auf dem Laufenden. Feedback-Runden inklusive.</p>
+    </div>
+    <div class="step reveal" data-delay="3">
+      <div class="step-num">04</div>
+      <div class="step-name">Launch & Betreuung</div>
+      <p class="step-desc">Live-Gang, Einweisung und laufende Unterstützung – ich lasse dich nicht allein.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ME -->
+<section id="warum" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="s-tag reveal">— Warum ich</div>
+  <h2 class="s-title reveal">Was dich von der Konkurrenz<br>unterscheiden wird</h2>
+  <p class="s-desc reveal">Deine Mitbewerber haben eine Standard-Website. Du bekommst ein digitales Verkaufssystem.</p>
+
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <span class="why-card-icon">◈</span>
+      <div class="why-card-name">Alles aus einer Hand</div>
+      <p class="why-card-desc">Web, Design, Marketing – du musst nicht mit 5 verschiedenen Dienstleistern jonglieren. Ich decke das gesamte digitale Spektrum ab.</p>
+    </div>
+    <div class="why-card reveal" data-delay="1">
+      <span class="why-card-icon">⬡</span>
+      <div class="why-card-name">Technologisch an der Spitze</div>
+      <p class="why-card-desc">Ich setze die neuesten Tools und Technologien ein – damit deine Website nicht nur heute, sondern auch morgen noch überzeugt.</p>
+    </div>
+    <div class="why-card reveal" data-delay="2">
+      <span class="why-card-icon">◭</span>
+      <div class="why-card-name">Psychologie trifft Design</div>
+      <p class="why-card-desc">Jede Farbe, jedes Wort, jeder Button ist durchdacht. Nicht weil es schön ist – sondern weil es funktioniert und Kunden zu Käufern macht.</p>
+    </div>
+    <div class="why-card reveal" data-delay="3">
+      <span class="why-card-icon">◉</span>
+      <div class="why-card-name">Schnell & zuverlässig</div>
+      <p class="why-card-desc">Keine monatelangen Wartezeiten. Ich liefere in Wochen, nicht Monaten – und halte, was ich verspreche.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="kontakt">
+  <div class="cta-avail reveal">● Aktuell verfügbar</div>
+  <div class="s-tag reveal">— Projekt starten</div>
+  <h2 class="s-title reveal">Bereit für eine Website,<br>die wirklich verkauft?</h2>
+  <p class="s-desc reveal">Lass uns reden. Das erste Gespräch ist kostenlos – und du weißt danach genau, was möglich ist.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <a href="mailto:deine@kskn.de" class="btn-primary reveal">Jetzt anfragen</a>
+    <a href="https://wa.me/49XXXXXXXXX" class="btn-secondary reveal" data-delay="1">WhatsApp</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-copy">© 2025 KSKN · Alle Rechte vorbehalten</div>
+  <div class="foot-links">
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+    <a href="mailto:deine@kskn.de">Kontakt</a>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cur=document.getElementById('cur'),ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';ring.style.opacity='.7'});
+  el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.opacity='.4'});
+});
+
+// Nav scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>60));
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}});
+},{threshold:.12});
+document.querySelectorAll('.reveal,.stat,.svc-card,.step,.why-card').forEach(el=>obs.observe(el));
+
+// Counter animation
+function animCount(el){
+  const target=+el.dataset.target;
+  const suffix=el.nextSibling?.textContent?.trim()||'';
+  const unit=el.parentElement.querySelector('.stat-label')?.textContent.includes('%')?'%':
+    el.parentElement.querySelector('.stat-label')?.textContent.includes('h')?'h':'';
+  let start=null;
+  const dur=1800;
+  function step(ts){
+    if(!start)start=ts;
+    const prog=Math.min((ts-start)/dur,1);
+    const ease=1-Math.pow(1-prog,4);
+    el.textContent=Math.floor(ease*target);
+    if(prog<1)requestAnimationFrame(step);
+    else el.textContent=target+(unit?'+':'');
+  }
+  requestAnimationFrame(step);
+}
+const statsObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('[data-target]').forEach(animCount);
+      statsObs.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+statsObs.observe(document.getElementById('stats'));
+// Smooth color cycle: cyan → purple → red → orange → cyan
+const colorStops=[
+  [185,100,50],
+  [270,85,60],
+  [0,90,55],
+  [25,95,55],
+  [185,100,50],
+];
+let colorT=0;
+function lerpColor(a,b,t){return a.map((v,i)=>v+(b[i]-v)*t)}
+function updateColor(){
+  const total=colorStops.length-1;
+  const scaled=(colorT%1)*total;
+  const idx=Math.floor(scaled);
+  const frac=scaled-idx;
+  const [h,s,l]=lerpColor(colorStops[idx],colorStops[idx+1],frac);
+  const main=`hsl(${h},${s}%,${l}%)`;
+  const dim=`hsla(${h},${s}%,${l}%,0.12)`;
+  const dim2=`hsla(${h},${s}%,${l}%,0.25)`;
+  document.documentElement.style.setProperty('--ac',main);
+  document.documentElement.style.setProperty('--border',dim);
+  document.documentElement.style.setProperty('--border2',dim2);
+  colorT+=0.0003;
+  if(colorT>=1)colorT=0;
+  requestAnimationFrame(updateColor);
+}
+updateColor();
+
+
+</script>
+</body>
+</html>
