@@ -117,6 +117,82 @@ section{padding:8rem 5vw}
 .why-card-name{font-family:'Syne',sans-serif;font-weight:600;font-size:1rem;margin-bottom:.5rem}
 .why-card-desc{font-size:.85rem;color:var(--muted);line-height:1.8}
 
+/* ═══════════ WHY CARDS — proof visuals + magnetic ═══════════ */
+.wc{
+  border-radius:16px;
+  overflow:hidden;
+  transition:transform .25s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s,background .3s;
+  will-change:transform;
+}
+.wc:hover{
+  border-color:var(--ac)!important;
+  background:var(--bg3);
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+.wc-visual{
+  position:absolute;top:0;right:0;width:140px;height:140px;
+  opacity:.06;
+  transition:opacity .5s ease;
+  pointer-events:none;
+  overflow:hidden;
+}
+.wc:hover .wc-visual{opacity:1}
+.why-card-icon,.why-card-name,.why-card-desc{position:relative;z-index:2}
+
+/* stat line */
+.wc-stat{
+  position:relative;z-index:2;
+  margin-top:1.2rem;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1.4rem;
+  color:var(--ac);
+  display:flex;align-items:baseline;gap:.4rem;
+}
+.wc-sub{font-family:'Inter',sans-serif;font-weight:400;font-size:.75rem;color:var(--muted)}
+
+/* ─ 01 merge: chaos boxes → one ─ */
+.wc-merge{position:absolute;inset:0}
+.wc-chaos{position:absolute;font-size:9px;font-weight:600;padding:3px 7px;border-radius:5px;background:rgba(255,255,255,.12);color:#fff;transition:all .6s cubic-bezier(.34,1.4,.64,1)}
+.c1{top:20px;left:14px}.c2{top:46px;left:60px}.c3{top:74px;left:20px}.c4{top:30px;left:88px}.c5{top:90px;left:74px}
+.wc:hover .wc-chaos{top:60px;left:42px;opacity:0;transform:scale(.4)}
+.wc-one{position:absolute;top:54px;left:36px;font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:var(--ac);opacity:0;transform:scale(.5);transition:all .5s .3s cubic-bezier(.34,1.56,.64,1)}
+.wc:hover .wc-one{opacity:1;transform:scale(1)}
+
+/* ─ 02 tech rings ─ */
+.wc-tech{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.wc-ring{position:absolute;border-radius:50%;border:1.5px solid var(--ac);opacity:0}
+.r1{width:40px;height:40px}.r2{width:70px;height:70px}.r3{width:100px;height:100px}
+.wc:hover .r1{animation:techPulse 2s ease-out infinite}
+.wc:hover .r2{animation:techPulse 2s ease-out .4s infinite}
+.wc:hover .r3{animation:techPulse 2s ease-out .8s infinite}
+@keyframes techPulse{0%{opacity:.7;transform:scale(.6)}100%{opacity:0;transform:scale(1.1)}}
+.wc-core{position:absolute;font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:var(--ac)}
+
+/* ─ 03 heatmap ─ */
+.wc-heat{position:absolute;inset:0}
+.wc-blob{position:absolute;border-radius:50%;filter:blur(8px);opacity:0;transition:opacity .5s}
+.hb1{width:50px;height:50px;background:#FF3B30;top:30px;left:30px}
+.hb2{width:36px;height:36px;background:#FFB340;top:60px;left:70px}
+.hb3{width:28px;height:28px;background:#27FF8A;top:20px;left:80px}
+.wc:hover .hb1{opacity:.7;animation:heatPulse 1.6s ease-in-out infinite}
+.wc:hover .hb2{opacity:.6;animation:heatPulse 1.6s ease-in-out .3s infinite}
+.wc:hover .hb3{opacity:.5;animation:heatPulse 1.6s ease-in-out .6s infinite}
+@keyframes heatPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+.wc-eye{position:absolute;top:48px;left:52px;font-size:22px;color:#fff;opacity:0;transition:opacity .4s .4s}
+.wc:hover .wc-eye{opacity:.9}
+
+/* ─ 04 clock ─ */
+.wc-clock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.wc-dial{width:64px;height:64px;border-radius:50%;border:2.5px solid var(--ac);opacity:.5}
+.wc-hand{position:absolute;width:2.5px;height:26px;background:var(--ac);border-radius:2px;transform-origin:bottom center;bottom:50%;transform:rotate(0deg)}
+.wc:hover .wc-hand{animation:clockSpin 1.4s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes clockSpin{0%{transform:rotate(0deg)}100%{transform:rotate(680deg)}}
+
+@media(max-width:768px){
+  .wc-visual{width:100px;height:100px;opacity:.08}
+  .wc-stat{font-size:1.2rem}
+}
+
+
 /* CTA */
 .cta-section{text-align:center;padding:10rem 5vw;position:relative;overflow:hidden}
 .cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,229,255,.07) 0%,transparent 65%)}
@@ -271,7 +347,7 @@ body.light .btn-secondary{color:var(--text);border-color:rgba(0,0,0,.25)}
 body.light .btn-secondary:hover{border-color:var(--ac);color:var(--ac)}
 body.light #scrollSticky{background:#F5F5F7}
 body.light .from-them{background:#E9E9EB;color:#000}
-body.light .from-them::after{background:#E9E9EB}
+body.light .from-them::before{background:#E9E9EB}
 body.light #p2 > div{background:#FAFAFA;border-color:rgba(0,0,0,.1)}
 body.light #p2 > div > div:first-child{background:#F0F0F0}
 body.light #p2 > div > div:nth-child(2) > div:first-child{background:#F8F8F8}
@@ -477,8 +553,8 @@ body.light #swLabelBot { opacity: .25; }
 }
 .mat-scene svg{width:100%;height:100%;display:block}
 /* Faint base copy — always slightly visible */
-.mat-scene{opacity:.13;transition:opacity .4s ease}
-.mat-card:hover .mat-scene{opacity:.18}
+.mat-scene{opacity:.05;transition:opacity .4s ease}
+.mat-card:hover .mat-scene{opacity:.05}
 /* Bright masked copy — only visible in cursor circle */
 .mat-scene-bright{
   position:absolute;inset:0;z-index:2;
@@ -1000,10 +1076,14 @@ body.light #swLabelBot { opacity: .25; }
       /* iMessage */
       .imsg{max-width:210px;padding:11px 15px;font-size:13.5px;line-height:1.45;border-radius:20px;letter-spacing:-.01em;will-change:transform,opacity}
       .imsg{position:relative}
-      .from-them{background:#3B3B3D;color:#fff;border-bottom-left-radius:6px;align-self:flex-start}
-      .from-them::after{content:'';position:absolute;left:-5px;bottom:0;width:14px;height:16px;background:#3B3B3D;border-bottom-right-radius:14px;z-index:-1}
-      .from-me{background:linear-gradient(180deg,#3B96FF,#0A7CFF);color:#fff;border-bottom-right-radius:6px;align-self:flex-end;font-weight:400}
-      .from-me::after{content:'';position:absolute;right:-5px;bottom:0;width:14px;height:16px;background:#0A7CFF;border-bottom-left-radius:14px;z-index:-1}
+      /* received — gray, tail bottom-left */
+      .from-them{background:#3B3B3D;color:#fff;border-radius:18px;border-bottom-left-radius:5px;align-self:flex-start}
+      .from-them::before{content:'';position:absolute;bottom:0;left:-6px;width:16px;height:16px;background:#3B3B3D;border-bottom-right-radius:16px;z-index:-2}
+      .from-them::after{content:'';position:absolute;bottom:0;left:-16px;width:16px;height:16px;background:#000;border-bottom-right-radius:12px;z-index:-1}
+      /* sent — blue, tail bottom-right */
+      .from-me{background:linear-gradient(180deg,#3B96FF,#0A7CFF);color:#fff;border-radius:18px;border-bottom-right-radius:5px;align-self:flex-end;font-weight:400}
+      .from-me::before{content:'';position:absolute;bottom:0;right:-6px;width:16px;height:16px;background:#0A7CFF;border-bottom-left-radius:16px;z-index:-2}
+      .from-me::after{content:'';position:absolute;bottom:0;right:-16px;width:16px;height:16px;background:#000;border-bottom-left-radius:12px;z-index:-1}
       .msg-time{font-size:11px;color:rgba(255,255,255,.28);text-align:center;letter-spacing:.02em}
 
       .typing-dots{display:flex;gap:3px;padding:10px 14px;background:#262628;border-radius:20px;border-bottom-left-radius:5px;width:50px;align-self:flex-start}
@@ -1584,26 +1664,71 @@ body.light #swLabelBot { opacity: .25; }
   <p class="s-desc reveal">Deine Mitbewerber haben eine Standard-Website. Du bekommst ein digitales Verkaufssystem.</p>
 
   <div class="why-grid">
-    <div class="why-card reveal">
+
+    <!-- 01 Alles aus einer Hand -->
+    <div class="why-card wc reveal">
+      <div class="wc-visual">
+        <div class="wc-merge">
+          <span class="wc-chaos c1">SEO</span>
+          <span class="wc-chaos c2">Web</span>
+          <span class="wc-chaos c3">Design</span>
+          <span class="wc-chaos c4">Ads</span>
+          <span class="wc-chaos c5">Text</span>
+          <span class="wc-one">KSKN</span>
+        </div>
+      </div>
       <span class="why-card-icon">◈</span>
       <div class="why-card-name">Alles aus einer Hand</div>
       <p class="why-card-desc">Web, Design, Marketing – du musst nicht mit 5 verschiedenen Dienstleistern jonglieren. Ich decke das gesamte digitale Spektrum ab.</p>
+      <div class="wc-stat"><span class="wc-num" data-to="1">1</span> Ansprechpartner <span class="wc-sub">statt 5</span></div>
     </div>
-    <div class="why-card reveal" data-delay="1">
+
+    <!-- 02 Technologisch an der Spitze -->
+    <div class="why-card wc reveal" data-delay="1">
+      <div class="wc-visual">
+        <div class="wc-tech">
+          <span class="wc-ring r1"></span>
+          <span class="wc-ring r2"></span>
+          <span class="wc-ring r3"></span>
+          <span class="wc-core">2025</span>
+        </div>
+      </div>
       <span class="why-card-icon">⬡</span>
       <div class="why-card-name">Technologisch an der Spitze</div>
       <p class="why-card-desc">Ich setze die neuesten Tools und Technologien ein – damit deine Website nicht nur heute, sondern auch morgen noch überzeugt.</p>
+      <div class="wc-stat"><span class="wc-num" data-to="100">0</span>% <span class="wc-sub">modern & zukunftssicher</span></div>
     </div>
-    <div class="why-card reveal" data-delay="2">
+
+    <!-- 03 Psychologie trifft Design -->
+    <div class="why-card wc reveal" data-delay="2">
+      <div class="wc-visual">
+        <div class="wc-heat">
+          <span class="wc-blob hb1"></span>
+          <span class="wc-blob hb2"></span>
+          <span class="wc-blob hb3"></span>
+          <span class="wc-eye">⌖</span>
+        </div>
+      </div>
       <span class="why-card-icon">◭</span>
       <div class="why-card-name">Psychologie trifft Design</div>
       <p class="why-card-desc">Jede Farbe, jedes Wort, jeder Button ist durchdacht. Nicht weil es schön ist – sondern weil es funktioniert und Kunden zu Käufern macht.</p>
+      <div class="wc-stat"><span class="wc-num" data-to="3">0</span>× <span class="wc-sub">mehr Conversions</span></div>
     </div>
-    <div class="why-card reveal" data-delay="3">
+
+    <!-- 04 Schnell & zuverlässig -->
+    <div class="why-card wc reveal" data-delay="3">
+      <div class="wc-visual">
+        <div class="wc-clock">
+          <span class="wc-dial"></span>
+          <span class="wc-hand"></span>
+        </div>
+      </div>
       <span class="why-card-icon">◉</span>
       <div class="why-card-name">Schnell & zuverlässig</div>
       <p class="why-card-desc">Keine monatelangen Wartezeiten. Ich liefere in Wochen, nicht Monaten – und halte, was ich verspreche.</p>
+      <div class="wc-stat"><span class="wc-num" data-to="3">0</span> Wochen <span class="wc-sub">statt Monate</span></div>
     </div>
+
   </div>
 </section>
 
@@ -1752,7 +1877,7 @@ updateColor();
     const previewObs = new IntersectionObserver(es=>{
       es.forEach(e=>{
         const sc = e.target.querySelector('.mat-scene');
-        if(sc) sc.style.opacity = e.isIntersecting ? '.4' : '.13';
+        if(sc) sc.style.opacity = e.isIntersecting ? '.35' : '.05';
       });
     },{threshold:.5});
     cards.forEach(c=>previewObs.observe(c));
@@ -1787,6 +1912,44 @@ updateColor();
       if(bright){ bright.style.setProperty('--mx','-300px'); bright.style.setProperty('--my','-300px'); }
     });
   });
+})();
+</script>
+
+<script>
+// ═══════════ WHY CARDS — counters + magnetic hover ═══════════
+(function(){
+  const wcards = document.querySelectorAll('.why-card.wc');
+  if(!wcards.length) return;
+  function animateNum(el){
+    const to = parseInt(el.dataset.to, 10);
+    const dur = 1400; const start = performance.now();
+    (function step(now){
+      const t = Math.min((now-start)/dur, 1);
+      const e = 1 - Math.pow(1-t, 4);
+      el.textContent = Math.round(e*to);
+      if(t<1) requestAnimationFrame(step); else el.textContent = to;
+    })(performance.now());
+  }
+  const numObs = new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        const n = e.target.querySelector('.wc-num');
+        if(n && !n.dataset.done){ n.dataset.done='1'; animateNum(n); }
+      }
+    });
+  },{threshold:.5});
+  wcards.forEach(c=>numObs.observe(c));
+  if(!window.matchMedia('(hover: none)').matches){
+    wcards.forEach(card=>{
+      card.addEventListener('pointermove', e=>{
+        const r = card.getBoundingClientRect();
+        const mx = (e.clientX - r.left - r.width/2) / (r.width/2);
+        const my = (e.clientY - r.top - r.height/2) / (r.height/2);
+        card.style.transform = `translate(${mx*6}px, ${my*6}px) scale(1.015)`;
+      });
+      card.addEventListener('pointerleave', ()=>{ card.style.transform=''; });
+    });
+  }
 })();
 </script>
 
